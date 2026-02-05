@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorant Tournament Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Valorant Matchmaking System</h1>
+
+        <div id="setupSection">
+            <h2>Step 1: Register Teams</h2>
+            <div class="input-group">
+                <input type="text" id="teamInput" placeholder="Enter Team Name">
+                <button onclick="addTeam()">Add Team</button>
+            </div>
+            
+            <div class="input-group">
+                <label>Or Upload CSV (Header: "Team Name"): </label>
+                <input type="file" id="csvInput" accept=".csv" onchange="handleCSVFileSelect(this)">
+                <button class="secondary" onclick="processCSV()">Load CSV</button>
+            </div>
+
+            <div id="teamList"></div>
+            
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="startTournament()" style="font-size: 1.2em; padding: 15px 40px;">Start Tournament</button>
+            </div>
+        </div>
+
+        <div id="bracketSection" class="hidden">
+            <h2 id="roundTitle">Round 1</h2>
+            <div class="print-controls" style="text-align: center; margin-bottom: 20px;">
+                <button class="secondary print-btn" onclick="window.print()">Print Matchups</button>
+            </div>
+            <div id="matchContainer" class="match-grid"></div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button id="nextRoundBtn" class="secondary" onclick="generateNextRound()" disabled>Generate Next Round</button>
+            </div>
+
+            <div id="finalReportSection" class="hidden" style="text-align: center; margin-top: 30px;">
+                <button onclick="downloadFullReport()" style="font-size: 1.2em; padding: 15px 40px;">Download Full Tournament Report</button>
+            </div>
+        </div>
+
+        <div class="db-controls">
+            <button class="secondary" onclick="saveToJSON()">Download Data (Save)</button>
+            <input type="file" id="loadJsonInput" style="display: none;" onchange="loadFromJSON(this)">
+            <button class="secondary" onclick="document.getElementById('loadJsonInput').click()">Load Data (Import)</button>
+            <button class="secondary" style="background-color: #800;" onclick="resetAll()">Reset System</button>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+
+    <div class="scroll-nav-buttons">
+        <button id="scrollToTopBtn" onclick="scrollToTop()" title="Go to top">▲</button>
+        <button id="scrollToBottomBtn" onclick="scrollToBottom()" title="Go to bottom">▼</button>
+    </div>
+</body>
+</html>
